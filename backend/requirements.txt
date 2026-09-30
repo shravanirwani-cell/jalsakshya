@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+python-multipart
+rasterio
+geopandas
+shapely
+pysheds
+numpy
+pillow
+piexif
+reportlab
+matplotlib
+pystac-client
+planetary-computer
+sqlalchemy
+pydantic
+anthropic
