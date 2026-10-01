@@ -2,6 +2,7 @@ services:
   - type: web
     name: jalsakshya-backend
     runtime: python
+    plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt && python scripts/make_synthetic_data.py && python scripts/seed_db.py
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
