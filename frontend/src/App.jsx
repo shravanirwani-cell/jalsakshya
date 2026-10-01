@@ -111,7 +111,7 @@ export default function App() {
 
   if (initError) {
     return (
-      <div className="error-text" style={{ padding: 40 }}>
+      <div className="error-text" style={{ padding: 40 }} role="alert">
         Failed to load JalSakshya: {initError}. Is the backend running (uvicorn app.main:app)
         and has prepare_data.py / seed_db.py been run?
       </div>
@@ -134,6 +134,7 @@ export default function App() {
           showWatershed={showWatershed} setShowWatershed={setShowWatershed}
           showStreams={showStreams} setShowStreams={setShowStreams}
           showInterventions={showInterventions} setShowInterventions={setShowInterventions}
+          interventionsGeojson={interventionsGeojson}
         />
         <MapView
           meta={meta}

@@ -24,10 +24,23 @@ const GRADIENT_LEGENDS = {
 export default function LayerPanel({
   years, activeLayer, setActiveLayer, activeYear, setActiveYear,
   showWatershed, setShowWatershed, showStreams, setShowStreams,
-  showInterventions, setShowInterventions,
+  showInterventions, setShowInterventions, interventionsGeojson,
 }) {
+  const counts = { total: 0, corroborated: 0, mismatch: 0, inconclusive: 0 };
+  (interventionsGeojson?.features || []).forEach((f) => {
+    counts.total += 1;
+    if (counts[f.properties.verdict] !== undefined) counts[f.properties.verdict] += 1;
+  });
   return (
     <div className="panel layer-panel">
+      {interventionsGeojson && (
+        <div className="stat-grid">
+          <div className="stat"><b>{counts.total}</b><span>Interventions</span></div>
+          <div className="stat ok"><b>{counts.corroborated}</b><span>Corroborated</span></div>
+          <div className="stat bad"><b>{counts.mismatch}</b><span>Mismatch</span></div>
+          <div className="stat mute"><b>{counts.inconclusive}</b><span>Inconclusive</span></div>
+        </div>
+      )}
       <div className="panel-section">
         <h3>Base Layer</h3>
         {BASE_LAYERS.map((l) => (
