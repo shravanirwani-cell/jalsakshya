@@ -13,7 +13,18 @@ export const api = {
   meta: () => getJSON("/meta"),
   watershed: () => getJSON("/watershed"),
   streams: () => getJSON("/streams"),
-  layer: (name, year) => getJSON(`/layers/${name}/${year}`),
+ layer: async (name, year) => {
+  const data = await getJSON(`/layers/${name}/${year}`);
+
+  const backendOrigin = BASE.replace(/\/api\/?$/, "");
+
+  return {
+    ...data,
+    url: data.url.startsWith("http")
+      ? data.url
+      : backendOrigin + data.url,
+  };
+},
   interventions: () => getJSON("/interventions"),
   intervention: (id) => getJSON(`/interventions/${id}`),
   ranking: () => getJSON("/ranking"),
